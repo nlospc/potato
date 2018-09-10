@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/toolbar_bg_blue">
+        <com.example.nlospc.potatoapp.widget.IconFontTextView
+            android:id="@+id/tv_hot"
+            style="@style/toolbar_icon_style"
+            android:layout_marginEnd="20dp"
+            android:layout_toStartOf="@id/tv_search"
+            android:visibility="invisible"
+            android:text="@string/ic_hot" />
+        <com.example.nlospc.potatoapp.widget.IconFontTextView
+            android:id="@+id/tv_search"
+            style="@style/toolbar_icon_style"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:text="@string/ic_search"
+             />
+    </RelativeLayout>
+
+
+</LinearLayout>

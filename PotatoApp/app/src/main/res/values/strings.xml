@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PotatoApp</string>
+
+    <!--iconfont字体图标-->
+
+    <string name="ic_hot">&#xe66d; </string> <!--火-->
+    <string name="ic_search">&#xe6a8; </string>
+    <string name="ic_home">首页</string>
+    <string name="ic_type">分类</string> <!--搜索-->
+
+</resources>
