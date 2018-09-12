@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#2395FF</color>
+    <color name="colorPrimaryDark">#1189F8</color>
     <color name="colorAccent">#D81B60</color>
     <color name="toolbar_bg_blue">#ee1b71e2</color>
     <color name="text_grey">#ee434242</color>
     <color name="text_white">#eee</color>
     <color name="line">#e7e7e7</color>
     <color name="main">#2395ff</color>
+
+
+    <!--TabLayout-->
+    <color name="TabTextColor">#FFFFFF</color>
+    <color name="TabSelectColor">#FAFAFA</color>
+    <color name="TabIndicatorColor">#FFFFFF</color>
+
+
+    <!--text color-->
+    <color name="text0">#464646</color>
+    <color name="text1">#7e7e7e</color>
+    <color name="text2">#969696</color>
+    <color name="text3">#c8969696</color>
+    <color name="text4">#DDDDDD</color>
+    <color name="text5">#EFEFEF</color>
+    <color name="transparent">#0000</color>
 </resources>
