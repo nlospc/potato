@@ -1,6 +1,8 @@
 package com.example.nlospc.potatoapp.api;
 
 import com.example.nlospc.potatoapp.app.AppConst;
+import com.example.nlospc.potatoapp.model.ResponseData;
+import com.example.nlospc.potatoapp.model.UserBean;
 import com.lzy.okgo.OkGo;
 
 import java.util.List;
