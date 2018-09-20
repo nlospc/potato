@@ -1,4 +1,4 @@
-package com.example.nlospc.potatoapp.helper;
+package com.example.nlospc.potatoapp.helper.rxjava;
 
 import java.util.Observable;
 

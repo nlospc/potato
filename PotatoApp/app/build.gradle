@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -45,6 +49,13 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
 //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.35'
     implementation 'com.zhy:autolayout:1.4.5'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+
+    //okrx2
+    implementation 'com.lzy.net:okrx2:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.readystatesoftware.chuck:library:1.0.4'
+
     //轮播图库
     implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'

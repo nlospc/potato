@@ -3,17 +3,21 @@ package com.example.nlospc.potatoapp.ui.Base;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
 
+import com.example.nlospc.potatoapp.R;
 import com.example.nlospc.potatoapp.app.App;
 
+import com.example.nlospc.potatoapp.widget.MyDialog;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AutoLayoutActivity {
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AutoLayoutActivity {
     protected T mPresenter;
     private Dialog mDialog;
 
@@ -23,9 +27,9 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AutoLay
         App.activities.add(this);
         initWidget();
 
-        mPresenter=createPresenter();
-        if(mPresenter!=null){
-            mPresenter.attachView((V)this);
+        mPresenter = createPresenter();
+        if (mPresenter != null) {
+            mPresenter.attachView((V) this);
         }
         setContentView(provideContentViewId());
         ButterKnife.bind(this);
@@ -48,9 +52,9 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AutoLay
     }
 
     private void excuteStatesBar() {
-        ViewGroup viewGroup=getWindow().findViewById(Window.ID_ANDROID_CONTENT);
-        View mChildView=viewGroup.getChildAt(0);
-        if(mChildView!=null){
+        ViewGroup viewGroup = getWindow().findViewById(Window.ID_ANDROID_CONTENT);
+        View mChildView = viewGroup.getChildAt(0);
+        if (mChildView != null) {
             mChildView.setFitsSystemWindows(true);
         }
     }
@@ -58,7 +62,7 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AutoLay
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mPresenter!=null){
+        if (mPresenter != null) {
             mPresenter.detachView();
         }
     }
@@ -67,5 +71,26 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AutoLay
 
     protected abstract T createPresenter();
 
-    public void initWidget(){}
+    public void initWidget() {
+    }
+
+    public Dialog showWaitingDialog(String tip) {
+        hideWaitingDialog();
+        View view = View.inflate(this, R.layout.dialog_waiting, null);
+        if (!TextUtils.isEmpty(tip)) {
+            ((TextView) view.findViewById(R.id.tvTip)).setText(tip);
+        }
+        mDialog = new MyDialog(this, view, R.layout.dialog_waiting);
+        mDialog.show();
+        mDialog.setCancelable(false);
+        return mDialog;
+    }
+
+    public void hideWaitingDialog() {
+        if (mDialog != null) {
+            mDialog.dismiss();
+            mDialog = null;
+        }
+    }
+
 }

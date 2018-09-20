@@ -1,9 +1,16 @@
 package com.example.nlospc.potatoapp.api;
 
 import com.example.nlospc.potatoapp.app.AppConst;
+import com.example.nlospc.potatoapp.helper.JsonConvert;
+import com.example.nlospc.potatoapp.model.ArticleListVO;
+import com.example.nlospc.potatoapp.model.BannerBean;
+import com.example.nlospc.potatoapp.model.HotWordBean;
 import com.example.nlospc.potatoapp.model.ResponseData;
+import com.example.nlospc.potatoapp.model.TypeTagVO;
 import com.example.nlospc.potatoapp.model.UserBean;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okrx2.adapter.ObservableBody;
 
 import java.util.List;
 
@@ -91,11 +98,11 @@ public class WanService {
      *
      * @GET("/hotkey/json")
      */
-    public static Observable<ResponseData<List<HotKeyBean>>> getHotKey() {
-        return OkGo.<ResponseData<List<HotKeyBean>>>get(hotKeyUrl)
-                .converter(new JsonConvert<ResponseData<List<HotKeyBean>>>() {
+    public static Observable<ResponseData<List<HotWordBean>>> getHotKey() {
+        return OkGo.<ResponseData<List<HotWordBean>>>get(hotKeyUrl)
+                .converter(new JsonConvert<ResponseData<List<HotWordBean>>>() {
                 })
-                .adapt(new ObservableBody<ResponseData<List<HotKeyBean>>>());
+                .adapt(new ObservableBody<ResponseData<List<HotWordBean>>>());
     }
 
     /**

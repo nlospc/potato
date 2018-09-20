@@ -5,12 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_login"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="50dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp">
+        <com.example.nlospc.potatoapp.widget.IconFontTextView
+            android:id="@+id/ic_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/ic_close"
+            android:textColor="@color/text1"
+            android:textSize="32sp"/>
+
+        <com.example.nlospc.potatoapp.widget.CircleImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_below="@id/ic_close"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="25dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_photo" />
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/et_name"
