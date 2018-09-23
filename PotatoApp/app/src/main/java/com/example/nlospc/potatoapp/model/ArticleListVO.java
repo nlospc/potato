@@ -10,6 +10,11 @@ import java.util.List;
  * Description:
  */
 public class ArticleListVO implements Serializable{
+    private int offset;
+    private int size;
+    private List<ArticleBean> datas;
+
+
     public int getOffset() {
         return offset;
     }
@@ -34,12 +39,6 @@ public class ArticleListVO implements Serializable{
         this.datas = datas;
     }
 
-    private int offset;
-    private int size;
-    private List<ArticleBean> datas;
-    private int total;
-    private int pageCount;
-    private int curPage;
-    private boolean over;
+
 
 }

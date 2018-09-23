@@ -7,7 +7,7 @@ import java.util.List;
 public interface CollectView {
     void onRefreshSuccess(List<ArticleBean> data);
 
-    void onResfreshFail(String errorString);
+    void onRefreshFail(String errorString);
 
     void onLoadMoreSuccess(List<ArticleBean> data);
 

@@ -1,4 +1,4 @@
-package com.example.nlospc.potatoapp.presenter;
+package com.example.nlospc.potatoapp.ui.presenter;
 
 import com.example.nlospc.potatoapp.api.WanService;
 import com.example.nlospc.potatoapp.helper.rxjava.RxObserver;
