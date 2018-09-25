@@ -7,6 +7,9 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.nlospc.potatoapp.R;
+import com.example.nlospc.potatoapp.ui.fragment.HomeFragment;
+import com.example.nlospc.potatoapp.ui.fragment.TypeFragment;
+import com.example.nlospc.potatoapp.ui.fragment.UserFragment;
 import com.example.nlospc.potatoapp.ui.presenter.WebViewPresenter;
 import com.example.nlospc.potatoapp.ui.Base.BaseActivity;
 import com.example.nlospc.potatoapp.view.CommonWebView;
@@ -53,10 +56,10 @@ public class MainActivity extends BaseActivity{
     @Override
     public void initView() {
         setTabColor(ifHome,tvHome);
-       /* mFragments.add(HomeFragment.newInstance());
+        mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
-        mFragments.add(UserFragment.newInstance);
-        mViewPager.*/
+        mFragments.add(UserFragment.newInstance());
+        mViewPager.setAdapter(new FragPager);
     }
 
     private void setTabColor(IconFontTextView ifHome, TextView tvHome) {

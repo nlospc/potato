@@ -1,6 +1,6 @@
 package com.example.nlospc.potatoapp.view;
 
-import android.widget.TableLayout;
+import android.support.design.widget.TabLayout;
 
 import com.example.nlospc.potatoapp.model.ArticleBean;
 import com.example.nlospc.potatoapp.ui.adapter.ArticleListAdapter;
@@ -9,7 +9,7 @@ import com.example.nlospc.potatoapp.widget.AutoLineFeedLayout;
 import java.util.List;
 
 public interface TypeView {
-    TableLayout getTableLayout();
+    TabLayout getTableLayout();
     AutoLineFeedLayout getTagLayout();
     ArticleListAdapter getAdapter();
 

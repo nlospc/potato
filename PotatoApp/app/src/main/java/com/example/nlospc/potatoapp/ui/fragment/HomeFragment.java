@@ -1,10 +1,10 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
-import android.media.Image;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +36,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     private ArticleListAdapter mAdapter;
     private BGABanner mBannerView;
 
-    public static HomeFragment newInstance(){
+    public static Fragment newInstance(){
         return new HomeFragment();
     }
 
