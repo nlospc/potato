@@ -25,9 +25,7 @@ import butterknife.OnClick;
  * Description:
  */
 public class UserFragment extends BaseFragment {
-    @BindView(R.id.tv_name)
     TextView tvName;
-    @BindView(R.id.tv_logou)
     TextView tvLogou;
 
     public static Fragment newInstance() {
@@ -47,7 +45,8 @@ public class UserFragment extends BaseFragment {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initView(View rootView) {
-
+        tvLogou=rootView.findViewById(R.id.tv_logou);
+        tvName=rootView.findViewById(R.id.tv_name);
         if (PrefUtils.getBoolean(getContext(), AppConst.IS_LOGIN_KEY,false) == false){
             tvLogou.setText("点击登录");
             tvName.setText("暂未登录");

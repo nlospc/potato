@@ -4,10 +4,12 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.TextView;
+import android.support.v7.widget.AppCompatTextView;
+
 
 import com.example.nlospc.potatoapp.R;
 import com.example.nlospc.potatoapp.app.App;
@@ -31,8 +33,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AutoLa
         if (mPresenter != null) {
             mPresenter.attachView((V) this);
         }
+        Log.d("potatoTest","id>>>>>>>>>>>>>>>"+provideContentViewId());
+
         setContentView(provideContentViewId());
-        ButterKnife.bind(this);
+//        ButterKnife.bind(BaseActivity.this);
         excuteStatesBar();
 
         initView();
@@ -78,7 +82,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AutoLa
         hideWaitingDialog();
         View view = View.inflate(this, R.layout.dialog_waiting, null);
         if (!TextUtils.isEmpty(tip)) {
-            ((TextView) view.findViewById(R.id.tvTip)).setText(tip);
+            ((AppCompatTextView) view.findViewById(R.id.tvTip)).setText(tip);
         }
         mDialog = new MyDialog(this, view, R.layout.dialog_waiting);
         mDialog.show();

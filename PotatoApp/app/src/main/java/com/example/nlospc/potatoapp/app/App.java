@@ -3,6 +3,7 @@ package com.example.nlospc.potatoapp.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -24,8 +25,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext=this.getApplicationContext();
 
+        mContext=this.getApplicationContext();
         initOkgo();
 
     }

@@ -14,7 +14,7 @@
         android:layout_margin="25dp"
         android:scaleType="fitXY"
         app:srcCompat="@mipmap/ic_photo"/>
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         />
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoLink="web"

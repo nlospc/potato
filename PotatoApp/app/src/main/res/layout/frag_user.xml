@@ -23,7 +23,7 @@
             android:layout_marginTop="30dp"
             app:srcCompat="@mipmap/default_avatar" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,11 +39,11 @@
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="80px"
+            android:layout_marginTop="40dp"
             app:cardCornerRadius="10dp"
             app:contentPadding="10dp">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -63,7 +63,7 @@
             app:cardCornerRadius="10dp"
             app:contentPadding="10dp">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -83,7 +83,7 @@
             app:cardCornerRadius="10dp"
             app:contentPadding="10dp">
 
-            <TextView
+            <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_logou"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

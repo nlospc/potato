@@ -1,17 +1,22 @@
 package com.example.nlospc.potatoapp.ui.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.nlospc.potatoapp.R;
+import com.example.nlospc.potatoapp.ui.adapter.FragPagerAdapter;
 import com.example.nlospc.potatoapp.ui.fragment.HomeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.TypeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.UserFragment;
 import com.example.nlospc.potatoapp.ui.presenter.WebViewPresenter;
 import com.example.nlospc.potatoapp.ui.Base.BaseActivity;
+import com.example.nlospc.potatoapp.utils.UIUtils;
 import com.example.nlospc.potatoapp.view.CommonWebView;
 import com.example.nlospc.potatoapp.widget.IconFontTextView;
 
@@ -22,29 +27,35 @@ import java.util.List;
 
 import butterknife.BindInt;
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity{
-    @BindView(R.id.view_pager)
+//    @BindView(R.id.view_pager)
     ViewPager mViewPager;
-    @BindView(R.id.if_home)
+//    @BindView(R.id.if_home)
     IconFontTextView ifHome;
-    @BindView(R.id.tv_home)
+//    @BindView(R.id.tv_home)
     TextView tvHome;
-    @BindView(R.id.ll_home)
+//    @BindView(R.id.ll_home)
     LinearLayout llHome;
-    @BindView(R.id.if_type)
+//    @BindView(R.id.if_type)
     IconFontTextView ifType;
-    @BindView(R.id.ll_type)
+//    @BindView(R.id.tv_type)
+    TextView tvType;
+//    @BindView(R.id.ll_type)
     LinearLayout llType;
-    @BindView(R.id.if_user)
+//    @BindView(R.id.if_user)
     IconFontTextView ifUser;
-    @BindView(R.id.tv_user)
+//    @BindView(R.id.tv_user)
     TextView tvUser;
-    @BindView(R.id.tv_search)
+//    @BindView(R.id.tv_search)
     IconFontTextView tvSearch;
     private List<Fragment> mFragments=new ArrayList<>();
+
     @Override
     protected int provideContentViewId() {
+
         return R.layout.activity_main;
     }
 
@@ -55,14 +66,83 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public void initView() {
+        mViewPager=findViewById(R.id.view_pager);
+        ifHome=findViewById(R.id.if_home);
+        tvHome=findViewById(R.id.tv_home);
+        ifType=findViewById(R.id.if_type);
+        ifUser=findViewById(R.id.if_user);
+        tvType=findViewById(R.id.tv_type);
+        tvUser=findViewById(R.id.tv_user);
+        tvSearch=findViewById(R.id.tv_search);
         setTabColor(ifHome,tvHome);
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
         mFragments.add(UserFragment.newInstance());
-        mViewPager.setAdapter(new FragPager);
+        mViewPager.setAdapter(new FragPagerAdapter(getSupportFragmentManager(),mFragments));
+        mViewPager.setCurrentItem(0,false);
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position){
+                    case 0:
+                        setTabColor(ifHome,tvHome);
+                        break;
+                    case 1:
+                        setTabColor(ifType,tvType);
+                        break;
+                    case 2:
+                        setTabColor(ifUser,tvUser);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
-    private void setTabColor(IconFontTextView ifHome, TextView tvHome) {
+    private void setTabColor(IconFontTextView icon, TextView textView) {
+        Log.d("Test","ifHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ ifHome);
+        Log.d("Test","tvHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ tvHome);
+        Log.d("Test","ifType>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ ifType);
+        ifHome.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
+        tvHome.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
+        ifType.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
+        tvType.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
+        ifUser.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
+        tvUser.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
+        icon.setTextColor(UIUtils.getColor(R.color.tab_sel_color));
+        textView.setTextColor(UIUtils.getColor(R.color.tab_sel_color));
+    }
 
+    @OnClick({R.id.ll_home,R.id.ll_hot_key,R.id.ll_type,R.id.ll_user,R.id.tv_search})
+    public void onClicked(View v){
+        switch (v.getId()){
+            case R.id.ll_home:
+                mViewPager.setCurrentItem(0);
+                setTabColor(ifHome,tvHome);
+                break;
+            case R.id.ll_hot_key:
+                break;
+            case R.id.ll_type:
+                mViewPager.setCurrentItem(1);
+                setTabColor(ifType,tvType);
+                break;
+            case R.id.ll_user:
+                mViewPager.setCurrentItem(2);
+                setTabColor(ifUser,tvUser);
+                break;
+            case R.id.tv_search:
+                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                break;
+        }
     }
 }

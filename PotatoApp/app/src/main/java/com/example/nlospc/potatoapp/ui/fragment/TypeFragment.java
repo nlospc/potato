@@ -25,11 +25,8 @@ import butterknife.BindView;
 
 public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
         implements TypeView, BaseQuickAdapter.RequestLoadMoreListener{
-    @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
-    @BindView(R.id.rv_content)
     RecyclerView rvContent;
-    @BindView(R.id.ll_tag)
     AutoLineFeedLayout llTag;
     private ArticleListAdapter mAdapter;
 
@@ -49,6 +46,9 @@ public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initView(View rootView) {
+        rvContent=rootView.findViewById(R.id.rv_content);
+        mTabLayout=rootView.findViewById(R.id.tabLayout);
+        llTag=rootView.findViewById(R.id.ll_tag);
 
         rvContent.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ArticleListAdapter(getContext(),null);

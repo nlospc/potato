@@ -24,4 +24,9 @@
     <color name="text4">#DDDDDD</color>
     <color name="text5">#EFEFEF</color>
     <color name="transparent">#0000</color>
+    <color name="gray">#5000</color>
+
+    <!--selected/unselected-->
+    <color name= "tab_nor_color">#969696</color>
+    <color name= "tab_sel_color">#2395FF</color>
 </resources>

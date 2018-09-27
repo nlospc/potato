@@ -1,6 +1,7 @@
 package com.example.nlospc.potatoapp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by duanziqi on 2018/9/19
@@ -8,6 +9,12 @@ import java.io.Serializable;
  */
 public class TypeChildrenBean implements Serializable {
     private int id;
+    private String name;
+    private int courseId;
+    private int parentChapterId;
+    private int order;
+    private int visible;
+    private List<?> children;
 
     public int getId() {
         return id;
@@ -25,6 +32,30 @@ public class TypeChildrenBean implements Serializable {
         this.name = name;
     }
 
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public int getParentChapterId() {
+        return parentChapterId;
+    }
+
+    public void setParentChapterId(int parentChapterId) {
+        this.parentChapterId = parentChapterId;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     public int getVisible() {
         return visible;
     }
@@ -33,6 +64,13 @@ public class TypeChildrenBean implements Serializable {
         this.visible = visible;
     }
 
-    private String name;
-    private int visible;
+    public List<?> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<?> children) {
+        this.children = children;
+    }
+
+
 }
