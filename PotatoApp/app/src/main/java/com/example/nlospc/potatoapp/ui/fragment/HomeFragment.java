@@ -4,10 +4,10 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -27,17 +27,17 @@ import java.util.List;
 import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
-public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
-        implements HomeView,SwipeRefreshLayout.OnRefreshListener {
-    @BindView(R.id.rv_content)
-    RecyclerView rvContent;
-    @BindView(R.id.swipe_fresh)
-    SwipeRefreshLayout swipeRefreshLayout;
+public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
+        implements HomeView, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+    private RecyclerView rvContent;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private ArticleListAdapter mAdapter;
     private BGABanner mBannerView;
+    
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
+        return fragment;
 
-    public static HomeFragment newInstance(){
-        return new HomeFragment();
     }
 
     @Override
@@ -68,36 +68,35 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
 
     @Override
     public void getBannerDataSuccess(List<BannerBean> data) {
-        mBannerView.setData(R.layout.item_banner,data,null);
-        mBannerView.setAdapter(new BGABanner.Adapter<View,BannerBean>() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
+        Log.d("getBannerDataSuccess","data>>>>>>>2>>>>>>>>>"+data);
+        mBannerView.setData(R.layout.item_banner, data, null);
+        mBannerView.setAdapter(new BGABanner.Adapter<View, BannerBean>() {
             @Override
             public void fillBannerItem(BGABanner banner, View itemView, @Nullable BannerBean model, int position) {
-                ImageView imageView=itemView.findViewById(R.id.image_view);
-                ImageLoaderManager.LoadImage(getContext(),model.getImagePath(),imageView);
+                ImageView imageView = itemView.findViewById(R.id.image_view);
+                ImageLoaderManager.LoadImage(getContext(), model.getImagePath(), imageView);
             }
         });
-        mBannerView.setDelegate(new BGABanner.Delegate<View,BannerBean>() {
-
-            @RequiresApi(api = Build.VERSION_CODES.M)
+        mBannerView.setDelegate(new BGABanner.Delegate<View, BannerBean>() {
             @Override
             public void onBannerItemClick(BGABanner banner, View itemView, @Nullable BannerBean model, int position) {
-                WebViewActivity.runActivity(getContext(),model.getUrl());
+                WebViewActivity.runActivity(getContext(), model.getUrl());
             }
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void initView(View view) {
+    public void initView(View v) {
+        rvContent = v.findViewById(R.id.rv_content);
+        swipeRefreshLayout = v.findViewById(R.id.swipe_fresh);
         rvContent.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ArticleListAdapter(getContext(), null);
         rvContent.setAdapter(mAdapter);
         swipeRefreshLayout.setOnRefreshListener(this);
-        mAdapter.setOnLoadMoreListener((BaseQuickAdapter.RequestLoadMoreListener) this, rvContent);
+        mAdapter.setOnLoadMoreListener(this, rvContent);
 
         //添加头部轮播图布局
-        View headView = View.inflate(getActivity(), R.layout.item_banner, null);
+        View headView = View.inflate(getActivity(), R.layout.activity_banner, null);
         mBannerView = headView.findViewById(R.id.banner);
         mAdapter.addHeaderView(headView);
 
@@ -107,7 +106,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     @Override
     public void getDataError(String message) {
         showRefreshView(false);
-        Snackbar.make(rvContent,message,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(rvContent, message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -123,5 +122,10 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
         } else {
             mAdapter.loadMoreEnd();
         }
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        mPresenter.getMoreData();
     }
 }

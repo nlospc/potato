@@ -3,6 +3,7 @@ package com.example.nlospc.potatoapp.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
 import com.example.nlospc.potatoapp.app.App;
 
@@ -12,6 +13,8 @@ import com.example.nlospc.potatoapp.app.App;
  * @描述 和ui相关的工具类
  */
 public class UIUtils {
+
+
 
     /**
      * 得到上下文
@@ -28,6 +31,7 @@ public class UIUtils {
      * @return
      */
     public static Resources getResource() {
+
         return getContext().getResources();
     }
 

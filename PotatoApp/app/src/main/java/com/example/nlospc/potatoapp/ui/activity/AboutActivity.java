@@ -12,8 +12,6 @@ import butterknife.OnClick;
 
 public class AboutActivity extends BaseActivity {
 
-    @BindView(R.id.tv_back)
-    TextView tvback;
     @BindView(R.id.tv_search)
     TextView tvsearch;
     @BindView(R.id.tv_title)

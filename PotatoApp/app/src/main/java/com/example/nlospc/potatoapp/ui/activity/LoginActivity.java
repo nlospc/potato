@@ -11,8 +11,8 @@ import com.example.nlospc.potatoapp.app.AppConst;
 import com.example.nlospc.potatoapp.model.UserBean;
 import com.example.nlospc.potatoapp.ui.presenter.LoginRegistPresenter;
 import com.example.nlospc.potatoapp.ui.Base.BaseActivity;
-import com.example.nlospc.potatoapp.ui.view.LoginRegistView;
 import com.example.nlospc.potatoapp.utils.PrefUtils;
+import com.example.nlospc.potatoapp.view.LoginRegistView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -87,11 +87,6 @@ public class LoginActivity extends BaseActivity<LoginRegistView, LoginRegistPres
     }
 
     @Override
-    public void loginFailed() {
-        Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void registerSuccess(UserBean user) {
         Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
         PrefUtils.setBoolean(LoginActivity.this, AppConst.IS_LOGIN_KEY, true);
@@ -101,10 +96,13 @@ public class LoginActivity extends BaseActivity<LoginRegistView, LoginRegistPres
     }
 
     @Override
-    public void registerFailed() {
-        Toast.makeText(LoginActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
-
+    public void loginFail() {
+        Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void registerFail() {
+        Toast.makeText(LoginActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+    }
 
 }

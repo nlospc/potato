@@ -4,10 +4,10 @@ import com.example.nlospc.potatoapp.api.WanService;
 import com.example.nlospc.potatoapp.helper.rxjava.RxObserver;
 import com.example.nlospc.potatoapp.helper.rxjava.RxResultHelper;
 import com.example.nlospc.potatoapp.helper.rxjava.RxSchedulersHelper;
-import com.example.nlospc.potatoapp.model.ResponseData;
 import com.example.nlospc.potatoapp.model.UserBean;
 import com.example.nlospc.potatoapp.ui.Base.BasePresenter;
-import com.example.nlospc.potatoapp.ui.view.LoginRegistView;
+
+import com.example.nlospc.potatoapp.view.LoginRegistView;
 
 import io.reactivex.disposables.Disposable;
 
@@ -28,7 +28,7 @@ public class LoginRegistPresenter extends BasePresenter<LoginRegistView> {
 
                     @Override
                     public void _onError(String errorMessage) {
-                        getView().loginFailed();
+                        getView().loginFail();
                     }
 
                     @Override
@@ -60,7 +60,7 @@ public class LoginRegistPresenter extends BasePresenter<LoginRegistView> {
 
                     @Override
                     public void _onError(String errorMessage) {
-                        getView().registerFailed();
+                        getView().registerFail();
                     }
 
                     @Override

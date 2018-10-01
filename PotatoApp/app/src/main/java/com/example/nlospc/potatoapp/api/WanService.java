@@ -109,7 +109,7 @@ public class WanService {
      * 搜索
      * http://www.wanandroid.com/article/query/0/json
      * @param page page
-     * @param k    POST search key
+     * @param key    POST search key
      * @POST("/article/query/{page}/json")
      */
     public static Observable<ResponseData<ArticleListVO>> searchArticle(int page,String key) {
@@ -141,7 +141,7 @@ public class WanService {
      *
      * @param username   username
      * @param password   password
-     * @param repassword 确认密码
+     * @param password 确认密码
      * @POST("/user/register")
      */
     public static Observable<ResponseData<UserBean>> regist(String username, String password) {
