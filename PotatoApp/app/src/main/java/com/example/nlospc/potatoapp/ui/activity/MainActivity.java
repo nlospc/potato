@@ -1,12 +1,15 @@
 package com.example.nlospc.potatoapp.ui.activity;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.nlospc.potatoapp.R;
+import com.example.nlospc.potatoapp.ui.Base.BaseFragment;
+import com.example.nlospc.potatoapp.ui.adapter.FragPagerAdapter;
 import com.example.nlospc.potatoapp.ui.fragment.HomeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.TypeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.UserFragment;
@@ -42,7 +45,7 @@ public class MainActivity extends BaseActivity{
     TextView tvUser;
     @BindView(R.id.tv_search)
     IconFontTextView tvSearch;
-    private List<Fragment> mFragments=new ArrayList<>();
+    private List<BaseFragment> mFragments=new ArrayList<BaseFragment>();
     @Override
     protected int provideContentViewId() {
         return R.layout.activity_main;
@@ -59,7 +62,7 @@ public class MainActivity extends BaseActivity{
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
         mFragments.add(UserFragment.newInstance());
-        mViewPager.setAdapter(new FragPager);
+
     }
 
     private void setTabColor(IconFontTextView ifHome, TextView tvHome) {

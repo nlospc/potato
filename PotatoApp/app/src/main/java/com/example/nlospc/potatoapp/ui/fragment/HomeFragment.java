@@ -36,7 +36,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter>
     private ArticleListAdapter mAdapter;
     private BGABanner mBannerView;
 
-    public static Fragment newInstance(){
+    public static HomeFragment newInstance(){
         return new HomeFragment();
     }
 

@@ -33,7 +33,7 @@ public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
     AutoLineFeedLayout llTag;
     private ArticleListAdapter mAdapter;
 
-    public static Fragment newInstance() {
+    public static TypeFragment newInstance() {
         return new TypeFragment();
     }
 

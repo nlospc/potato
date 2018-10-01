@@ -30,7 +30,7 @@ public class UserFragment extends BaseFragment {
     @BindView(R.id.tv_logou)
     TextView tvLogou;
 
-    public static Fragment newInstance() {
+    public static UserFragment newInstance() {
         return new UserFragment();
     }
 
