@@ -1,8 +1,6 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +22,6 @@ import com.example.nlospc.potatoapp.widget.ImageLoaderManager;
 
 import java.util.List;
 
-import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
@@ -33,7 +30,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
     private SwipeRefreshLayout swipeRefreshLayout;
     private ArticleListAdapter mAdapter;
     private BGABanner mBannerView;
-    
+
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
@@ -58,33 +55,19 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
 
     @Override
     public void showRefreshView(boolean refresh) {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(refresh);
-            }
-        });
+        swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(refresh));
     }
 
     @Override
     public void getBannerDataSuccess(List<BannerBean> data) {
         Log.d("getBannerDataSuccess","data>>>>>>>2>>>>>>>>>"+data);
         mBannerView.setData(R.layout.item_banner, data, null);
-        mBannerView.setAdapter(new BGABanner.Adapter<View, BannerBean>() {
-            @Override
-            public void fillBannerItem(BGABanner banner, View itemView, @Nullable BannerBean model, int position) {
-                ImageView imageView = itemView.findViewById(R.id.image_view);
-                ImageLoaderManager.LoadImage(getContext(), model.getImagePath(), imageView);
-            }
+        mBannerView.setAdapter((BGABanner.Adapter<View, BannerBean>) (banner, itemView, model, position) -> {
+            ImageView imageView = itemView.findViewById(R.id.image_view);
+            ImageLoaderManager.LoadImage(getContext(), model.getImagePath(), imageView);
         });
-        mBannerView.setDelegate(new BGABanner.Delegate<View, BannerBean>() {
-            @Override
-            public void onBannerItemClick(BGABanner banner, View itemView, @Nullable BannerBean model, int position) {
-                WebViewActivity.runActivity(getContext(), model.getUrl());
-            }
-        });
+        mBannerView.setDelegate((BGABanner.Delegate<View, BannerBean>) (banner, itemView, model, position) -> WebViewActivity.runActivity(getContext(), model.getUrl()));
     }
-
     @Override
     public void initView(View v) {
         rvContent = v.findViewById(R.id.rv_content);

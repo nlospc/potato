@@ -2,40 +2,28 @@ package com.example.nlospc.potatoapp.ui.activity;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.nlospc.potatoapp.R;
-<<<<<<< HEAD
-import com.example.nlospc.potatoapp.ui.Base.BaseFragment;
-=======
->>>>>>> a154429ecfd134ec26a332df4b0b7b1df5c4f7a1
+import com.example.nlospc.potatoapp.ui.Base.BaseActivity;
 import com.example.nlospc.potatoapp.ui.adapter.FragPagerAdapter;
 import com.example.nlospc.potatoapp.ui.fragment.HomeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.TypeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.UserFragment;
 import com.example.nlospc.potatoapp.ui.presenter.WebViewPresenter;
-import com.example.nlospc.potatoapp.ui.Base.BaseActivity;
 import com.example.nlospc.potatoapp.utils.UIUtils;
-import com.example.nlospc.potatoapp.view.CommonWebView;
 import com.example.nlospc.potatoapp.widget.IconFontTextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindInt;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity{
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 //    @BindView(R.id.view_pager)
     ViewPager mViewPager;
 //    @BindView(R.id.if_home)
@@ -56,12 +44,8 @@ public class MainActivity extends BaseActivity{
     TextView tvUser;
 //    @BindView(R.id.tv_search)
     IconFontTextView tvSearch;
-<<<<<<< HEAD
-    private List<BaseFragment> mFragments=new ArrayList<BaseFragment>();
-=======
-    private List<Fragment> mFragments=new ArrayList<>();
 
->>>>>>> a154429ecfd134ec26a332df4b0b7b1df5c4f7a1
+    private List<Fragment> mFragments=new ArrayList<>();
     @Override
     protected int provideContentViewId() {
 
@@ -87,9 +71,6 @@ public class MainActivity extends BaseActivity{
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
         mFragments.add(UserFragment.newInstance());
-<<<<<<< HEAD
-
-=======
         mViewPager.setAdapter(new FragPagerAdapter(getSupportFragmentManager(),mFragments));
         mViewPager.setCurrentItem(0,false);
         mViewPager.setOffscreenPageLimit(3);
@@ -119,7 +100,6 @@ public class MainActivity extends BaseActivity{
 
             }
         });
->>>>>>> a154429ecfd134ec26a332df4b0b7b1df5c4f7a1
     }
 
     private void setTabColor(IconFontTextView icon, TextView textView) {
@@ -136,8 +116,8 @@ public class MainActivity extends BaseActivity{
         textView.setTextColor(UIUtils.getColor(R.color.tab_sel_color));
     }
 
-    @OnClick({R.id.ll_home,R.id.ll_hot_key,R.id.ll_type,R.id.ll_user,R.id.tv_search})
-    public void onClicked(View v){
+    @Override
+    public void onClick(View v){
         switch (v.getId()){
             case R.id.ll_home:
                 mViewPager.setCurrentItem(0);

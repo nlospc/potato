@@ -1,11 +1,7 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,8 +16,6 @@ import com.example.nlospc.potatoapp.view.TypeView;
 import com.example.nlospc.potatoapp.widget.AutoLineFeedLayout;
 
 import java.util.List;
-
-import butterknife.BindView;
 
 public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
         implements TypeView, BaseQuickAdapter.RequestLoadMoreListener{
@@ -41,9 +35,9 @@ public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
 
     @Override
     protected TypePresenter createPresenter() {
-        return new TypePresenter((FragmentActivity) getActivity());
+        return new TypePresenter(getActivity());
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     public void initView(View rootView) {
         rvContent=rootView.findViewById(R.id.rv_content);

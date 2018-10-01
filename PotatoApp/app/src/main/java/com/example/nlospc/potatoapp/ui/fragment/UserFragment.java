@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * Created by duanziqi on 2018/9/25
  * Description:
  */
-public class UserFragment extends BaseFragment {
+public class UserFragment extends BaseFragment implements View.OnClickListener {
     TextView tvName;
     TextView tvLogou;
 
@@ -42,7 +42,7 @@ public class UserFragment extends BaseFragment {
         return R.layout.frag_user;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     public void initView(View rootView) {
         tvLogou=rootView.findViewById(R.id.tv_logou);
@@ -56,9 +56,11 @@ public class UserFragment extends BaseFragment {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @OnClick({R.id.cv_collect, R.id.cv_about, R.id.cv_logou})
-    public void onViewClicked(View view) {
+
+
+
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.cv_collect:
                 if (PrefUtils.getBoolean(getContext(),AppConst.IS_LOGIN_KEY,false) == false){
