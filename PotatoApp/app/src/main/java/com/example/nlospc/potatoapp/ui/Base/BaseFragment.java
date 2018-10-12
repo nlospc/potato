@@ -70,4 +70,9 @@ public abstract class BaseFragment<V,T extends BasePresenter<V>> extends Fragmen
     protected abstract int provideContentView();
 
     protected abstract T createPresenter();
+
+    protected void lazyload(){
+
+
+    }
 }

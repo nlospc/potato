@@ -1,9 +1,6 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +14,6 @@ import com.example.nlospc.potatoapp.ui.activity.CollectActivity;
 import com.example.nlospc.potatoapp.ui.activity.LoginActivity;
 import com.example.nlospc.potatoapp.utils.PrefUtils;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 /**
  * Created by duanziqi on 2018/9/25
  * Description:
@@ -28,7 +22,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
     TextView tvName;
     TextView tvLogou;
 
-    public static Fragment newInstance() {
+    public static UserFragment newInstance() {
         return new UserFragment();
     }
 
@@ -42,7 +36,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
         return R.layout.frag_user;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     public void initView(View rootView) {
         tvLogou=rootView.findViewById(R.id.tv_logou);

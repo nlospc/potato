@@ -1,8 +1,6 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +22,6 @@ import com.example.nlospc.potatoapp.widget.ImageLoaderManager;
 
 import java.util.List;
 
-import butterknife.BindView;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
@@ -37,6 +34,7 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
+
     }
 
     @Override
@@ -70,7 +68,6 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
         });
         mBannerView.setDelegate((BGABanner.Delegate<View, BannerBean>) (banner, itemView, model, position) -> WebViewActivity.runActivity(getContext(), model.getUrl()));
     }
-
     @Override
     public void initView(View v) {
         rvContent = v.findViewById(R.id.rv_content);
