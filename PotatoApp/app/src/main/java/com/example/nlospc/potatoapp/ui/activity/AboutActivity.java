@@ -10,16 +10,15 @@ import com.example.nlospc.potatoapp.ui.Base.BasePresenter;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.tv_search)
-    TextView tvsearch;
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
+    private TextView tvSearch;
+    private TextView tvTitle;
 
-    @OnClick(R.id.tv_back)
-    public void onButtonClick() {
-        finish();
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.tv_back)
+            finish();
     }
 
 
@@ -35,8 +34,10 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        tvSearch = findViewById(R.id.tv_search);
+        tvTitle = findViewById(R.id.tv_title);
         tvTitle.setText("关于");
-        tvsearch.setVisibility(View.GONE);
+        tvSearch.setVisibility(View.GONE);
     }
 
 }

@@ -29,26 +29,20 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SearchActivity extends BaseActivity<SearchView,SearchPresenter>
-        implements SearchView,BaseQuickAdapter.RequestLoadMoreListener {
-   @BindView(R.id.et_search)
-    EditText etSearch;
-   @BindView(R.id.rl_search)
-    RelativeLayout rlSearch;
-   @BindView(R.id.tv_back)
-    TextView tvBack;
-   @BindView(R.id.tv_clean_input)
-   TextView tvCleanInput;
-   @BindView(R.id.layout_hot_key)
-    AutoLineFeedLayout layoutHotKey;
-   @BindView(R.id.ll_hot_key)
-    LinearLayout llHotKey;
-   @BindView(R.id.rv_content)
-    RecyclerView rvContent;
-   private ArticleListAdapter mArticleAdapter;
-    @OnClick({R.id.tv_clean_input,R.id.tv_back})
-    public void onViewClicked(View view){
-        switch (view.getId()){
+public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
+        implements SearchView, BaseQuickAdapter.RequestLoadMoreListener,View.OnClickListener {
+    private EditText etSearch;
+    private RelativeLayout rlSearch;
+    private TextView tvBack;
+    private TextView tvCleanInput;
+    private AutoLineFeedLayout layoutHotKey;
+    private LinearLayout llHotKey;
+    private RecyclerView rvContent;
+    private ArticleListAdapter mArticleAdapter;
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.tv_clean_input:
                 etSearch.setText(" ");
                 break;
@@ -78,9 +72,16 @@ public class SearchActivity extends BaseActivity<SearchView,SearchPresenter>
             }
         });
     }
+
     @Override
     public void initView() {
-
+        etSearch = findViewById(R.id.et_name);
+        rlSearch = findViewById(R.id.rl_search);
+        tvBack = findViewById(R.id.tv_back);
+        tvCleanInput = findViewById(R.id.tv_clean_input);
+        layoutHotKey = findViewById(R.id.layout_hot_key);
+        llHotKey = findViewById(R.id.ll_hot_key);
+        rvContent = findViewById(R.id.rv_content);
         rvContent.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
         mArticleAdapter = new ArticleListAdapter(SearchActivity.this, null);
         rvContent.setAdapter(mArticleAdapter);
@@ -90,6 +91,7 @@ public class SearchActivity extends BaseActivity<SearchView,SearchPresenter>
         mPresenter.getHotKeyData();
 
     }
+
     @Override
     protected int provideContentViewId() {
         return R.layout.activity_search;
@@ -102,35 +104,35 @@ public class SearchActivity extends BaseActivity<SearchView,SearchPresenter>
 
     @Override
     public void onLoadMoreRequested() {
-        String keyword=etSearch.getText().toString();
-        if(!TextUtils.isEmpty(keyword)){
+        String keyword = etSearch.getText().toString();
+        if (!TextUtils.isEmpty(keyword)) {
             mPresenter.getMoreData(etSearch.getText().toString());
         }
     }
 
     @Override
     public void getHotKeySuccess(List<HotWordBean> data) {
-       layoutHotKey.removeAllViews();
-       for (int i=0;i<data.size();i++){
-           View view=LinearLayout.inflate(SearchActivity.this,R.layout.item_search,null);
-           TextView tvHotKey=findViewById(R.id.text_item);
-           tvHotKey.setText(data.get(i).getName());
-           layoutHotKey.addView(tvHotKey);
-           int finalone=i;
-           view.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-                   etSearch.setText(data.get(finalone).getName());
+        layoutHotKey.removeAllViews();
+        for (int i = 0; i < data.size(); i++) {
+            View view = LinearLayout.inflate(SearchActivity.this, R.layout.item_search, null);
+            TextView tvHotKey = findViewById(R.id.text_item);
+            tvHotKey.setText(data.get(i).getName());
+            layoutHotKey.addView(tvHotKey);
+            int finalone = i;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    etSearch.setText(data.get(finalone).getName());
 
-                   CharSequence charSequence=etSearch.getText();
+                    CharSequence charSequence = etSearch.getText();
 
-                   if(charSequence instanceof Spannable){
-                       Spannable spanText= (Spannable) charSequence;
-                       Selection.setSelection(spanText,charSequence.length());
-                   }
-               }
-           });
-       }
+                    if (charSequence instanceof Spannable) {
+                        Spannable spanText = (Spannable) charSequence;
+                        Selection.setSelection(spanText, charSequence.length());
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -141,10 +143,10 @@ public class SearchActivity extends BaseActivity<SearchView,SearchPresenter>
 
     @Override
     public void searchDataSuccess(List<ArticleBean> data) {
-        if(data==null||data.size()==0){
+        if (data == null || data.size() == 0) {
             llHotKey.setVisibility(View.VISIBLE);
             rvContent.setVisibility(View.GONE);
-        }else {
+        } else {
             llHotKey.setVisibility(View.GONE);
             rvContent.setVisibility(View.VISIBLE);
         }
@@ -158,9 +160,9 @@ public class SearchActivity extends BaseActivity<SearchView,SearchPresenter>
 
     @Override
     public void loadMoreDataSuccess(List<ArticleBean> data) {
-        if(data.size()==0){
+        if (data.size() == 0) {
             mArticleAdapter.loadMoreEnd();
-        }else {
+        } else {
             mArticleAdapter.addData(data);
             mArticleAdapter.loadMoreComplete();
         }

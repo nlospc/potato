@@ -1,79 +1,59 @@
 package com.example.nlospc.potatoapp.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.nlospc.potatoapp.R;
+import com.example.nlospc.potatoapp.ui.Base.BaseActivity;
+import com.example.nlospc.potatoapp.ui.Base.BasePresenter;
 import com.example.nlospc.potatoapp.ui.adapter.FragPagerAdapter;
 import com.example.nlospc.potatoapp.ui.fragment.HomeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.TypeFragment;
 import com.example.nlospc.potatoapp.ui.fragment.UserFragment;
-import com.example.nlospc.potatoapp.ui.presenter.WebViewPresenter;
-import com.example.nlospc.potatoapp.ui.Base.BaseActivity;
 import com.example.nlospc.potatoapp.utils.UIUtils;
-import com.example.nlospc.potatoapp.view.CommonWebView;
 import com.example.nlospc.potatoapp.widget.IconFontTextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindInt;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-public class MainActivity extends BaseActivity{
-//    @BindView(R.id.view_pager)
-    ViewPager mViewPager;
-//    @BindView(R.id.if_home)
-    IconFontTextView ifHome;
-//    @BindView(R.id.tv_home)
-    TextView tvHome;
-//    @BindView(R.id.ll_home)
-    LinearLayout llHome;
-//    @BindView(R.id.if_type)
-    IconFontTextView ifType;
-//    @BindView(R.id.tv_type)
-    TextView tvType;
-//    @BindView(R.id.ll_type)
-    LinearLayout llType;
-//    @BindView(R.id.if_user)
-    IconFontTextView ifUser;
-//    @BindView(R.id.tv_user)
-    TextView tvUser;
-//    @BindView(R.id.tv_search)
-    IconFontTextView tvSearch;
+public class MainActivity extends BaseActivity implements View.OnClickListener{
+    private ViewPager mViewPager;
+    private IconFontTextView ifHome;
+    private TextView tvHome;
+    private IconFontTextView ifType;
+    private TextView tvType;
+    private IconFontTextView ifUser;
+    private TextView tvUser;
     private List<Fragment> mFragments=new ArrayList<>();
 
     @Override
     protected int provideContentViewId() {
-
         return R.layout.activity_main;
     }
 
     @Override
-    protected WebViewPresenter createPresenter() {
+    protected BasePresenter createPresenter() {
         return null;
     }
 
     @Override
     public void initView() {
-        mViewPager=findViewById(R.id.view_pager);
-        ifHome=findViewById(R.id.if_home);
-        tvHome=findViewById(R.id.tv_home);
-        ifType=findViewById(R.id.if_type);
-        ifUser=findViewById(R.id.if_user);
-        tvType=findViewById(R.id.tv_type);
-        tvUser=findViewById(R.id.tv_user);
-        tvSearch=findViewById(R.id.tv_search);
+        LayoutInflater inflater= (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view=inflater.inflate(R.layout.activity_main,null);
+        mViewPager=view.findViewById(R.id.view_pager);
+        ifHome=view.findViewById(R.id.if_home);
+        tvHome=view.findViewById(R.id.tv_home);
+        ifType=view.findViewById(R.id.if_type);
+        ifUser=view.findViewById(R.id.if_user);
+        tvType=view.findViewById(R.id.tv_type);
+        tvUser=view.findViewById(R.id.tv_user);
         setTabColor(ifHome,tvHome);
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
@@ -109,6 +89,7 @@ public class MainActivity extends BaseActivity{
         });
     }
 
+
     private void setTabColor(IconFontTextView icon, TextView textView) {
         Log.d("Test","ifHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ ifHome);
         Log.d("Test","tvHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ tvHome);
@@ -123,8 +104,8 @@ public class MainActivity extends BaseActivity{
         textView.setTextColor(UIUtils.getColor(R.color.tab_sel_color));
     }
 
-    @OnClick({R.id.ll_home,R.id.ll_hot_key,R.id.ll_type,R.id.ll_user,R.id.tv_search})
-    public void onClicked(View v){
+   @Override
+    public void onClick(View v){
         switch (v.getId()){
             case R.id.ll_home:
                 mViewPager.setCurrentItem(0);

@@ -18,44 +18,42 @@ import com.example.nlospc.potatoapp.view.CollectView;
 import com.example.nlospc.potatoapp.widget.IconFontTextView;
 
 
-
 import java.util.List;
 
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class CollectActivity extends BaseActivity<CollectView,CollectPresenter>
-        implements CollectView,SwipeRefreshLayout.OnRefreshListener,BaseQuickAdapter.RequestLoadMoreListener {
-    @BindView(R.id.tv_back)
-    IconFontTextView tvBack;
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.tv_no_collect)
-    TextView tvNoCollect;
-    @BindView(R.id.tv_other)
-    TextView tvOther;
-    @BindView(R.id.rv_content)
-    RecyclerView rvContent;
-    @BindView(R.id.swipe_fresh)
-    SwipeRefreshLayout swipeRefreshLayout;
+public class CollectActivity extends BaseActivity<CollectView, CollectPresenter>
+        implements CollectView, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, View.OnClickListener {
+    private TextView tvTitle;
+    private TextView tvNoCollect;
+    private TextView tvOther;
+    private RecyclerView rvContent;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private CollectArticleAdapter mAdapter;
-    @OnClick(R.id.tv_back)
-    public void onViewClicked(){
-        finish();
-    }
 
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.tv_back)
+            finish();
+    }
 
 
     @Override
     public void initView() {
+        tvTitle = findViewById(R.id.tv_title);
+        tvNoCollect = findViewById(R.id.tv_no_collect);
+        tvOther = findViewById(R.id.tv_other);
+        rvContent = findViewById(R.id.rv_content);
+        swipeRefreshLayout = findViewById(R.id.swipe_fresh);
         tvTitle.setText("我的收藏");
-
         rvContent.setLayoutManager(new LinearLayoutManager(CollectActivity.this));
-        mAdapter=new CollectArticleAdapter(CollectActivity.this,null);
+        mAdapter = new CollectArticleAdapter(CollectActivity.this, null);
         rvContent.setAdapter(mAdapter);
         swipeRefreshLayout.setOnRefreshListener(this);
-        mAdapter.setOnLoadMoreListener(this,rvContent);
+        mAdapter.setOnLoadMoreListener(this, rvContent);
         onRefresh();
     }
 
@@ -82,20 +80,20 @@ public class CollectActivity extends BaseActivity<CollectView,CollectPresenter>
     @Override
     public void onRefreshSuccess(List<ArticleBean> data) {
         mAdapter.setNewData(data);
-        tvNoCollect.setVisibility(data.size()==0? View.VISIBLE:View.GONE);
+        tvNoCollect.setVisibility(data.size() == 0 ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void onRefreshFail(String errorString) {
         showSwipeRefresh(false);
-        Snackbar.make(rvContent,errorString,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(rvContent, errorString, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLoadMoreSuccess(List<ArticleBean> data) {
-        if(data.size()==0){
+        if (data.size() == 0) {
             mAdapter.loadMoreEnd();
-        }else {
+        } else {
             mAdapter.addData(data);
             mAdapter.loadMoreComplete();
         }
@@ -105,7 +103,7 @@ public class CollectActivity extends BaseActivity<CollectView,CollectPresenter>
     public void onLoadMoreFail(String errorString) {
         showSwipeRefresh(false);
         mAdapter.loadMoreComplete();
-        Snackbar.make(rvContent,errorString,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(rvContent, errorString, Snackbar.LENGTH_SHORT).show();
 
     }
 

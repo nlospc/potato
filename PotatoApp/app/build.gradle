@@ -60,6 +60,7 @@ implementation 'com.android.support:support-v4:27.1.1'
     implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+
     //只在debug模式下有用
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
 }

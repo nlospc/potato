@@ -22,15 +22,12 @@ import butterknife.OnClick;
  * Description:
  */
 public class LoginActivity extends BaseActivity<LoginRegistView, LoginRegistPresenter>
-        implements LoginRegistView {
-    @BindView(R.id.et_name)
+        implements LoginRegistView,View.OnClickListener{
     EditText etName;
-    @BindView(R.id.et_passwd)
     EditText etPassword;
 
-
-    @OnClick({R.id.ic_close, R.id.btn_register, R.id.btn_login})
-    public void onViewClicked(View view) {
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ic_close:
                 finish();
@@ -59,6 +56,8 @@ public class LoginActivity extends BaseActivity<LoginRegistView, LoginRegistPres
 
     @Override
     protected int provideContentViewId() {
+        etName=findViewById(R.id.et_name);
+        etPassword=findViewById(R.id.et_passwd);
         return R.layout.activity_login;
     }
 

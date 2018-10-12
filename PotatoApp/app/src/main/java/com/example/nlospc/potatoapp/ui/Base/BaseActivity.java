@@ -36,9 +36,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AutoLa
         Log.d("potatoTest","id>>>>>>>>>>>>>>>"+provideContentViewId());
 
         setContentView(provideContentViewId());
-//        ButterKnife.bind(BaseActivity.this);
+//        ButterKnife.bind(this);
         excuteStatesBar();
-
         initView();
         initData();
         initListener();

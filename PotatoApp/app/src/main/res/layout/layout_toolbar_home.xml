@@ -14,7 +14,7 @@
             android:id="@+id/tv_back"
             android:layout_width="56dp"
             android:layout_height="match_parent"
-            android:textSize="22sp"
+            android:textSize="40sp"
             android:gravity="center"
             android:textColor="@color/white"
             android:text="@string/ic_return"
@@ -24,7 +24,11 @@
 
         <com.example.nlospc.potatoapp.widget.IconFontTextView
             android:id="@+id/tv_search"
-            style="@style/toolbar_icon_style"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:paddingTop="10dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
             android:text="@string/ic_search" />

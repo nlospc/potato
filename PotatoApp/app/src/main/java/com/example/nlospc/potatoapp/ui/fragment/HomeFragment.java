@@ -57,31 +57,18 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
 
     @Override
     public void showRefreshView(boolean refresh) {
-        swipeRefreshLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(refresh);
-            }
-        });
+        swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(refresh));
     }
 
     @Override
     public void getBannerDataSuccess(List<BannerBean> data) {
         Log.d("getBannerDataSuccess","data>>>>>>>2>>>>>>>>>"+data);
         mBannerView.setData(R.layout.item_banner, data, null);
-        mBannerView.setAdapter(new BGABanner.Adapter<View, BannerBean>() {
-            @Override
-            public void fillBannerItem(BGABanner banner, View itemView, @Nullable BannerBean model, int position) {
-                ImageView imageView = itemView.findViewById(R.id.image_view);
-                ImageLoaderManager.LoadImage(getContext(), model.getImagePath(), imageView);
-            }
+        mBannerView.setAdapter((BGABanner.Adapter<View, BannerBean>) (banner, itemView, model, position) -> {
+            ImageView imageView = itemView.findViewById(R.id.image_view);
+            ImageLoaderManager.LoadImage(getContext(), model.getImagePath(), imageView);
         });
-        mBannerView.setDelegate(new BGABanner.Delegate<View, BannerBean>() {
-            @Override
-            public void onBannerItemClick(BGABanner banner, View itemView, @Nullable BannerBean model, int position) {
-                WebViewActivity.runActivity(getContext(), model.getUrl());
-            }
-        });
+        mBannerView.setDelegate((BGABanner.Delegate<View, BannerBean>) (banner, itemView, model, position) -> WebViewActivity.runActivity(getContext(), model.getUrl()));
     }
 
     @Override
