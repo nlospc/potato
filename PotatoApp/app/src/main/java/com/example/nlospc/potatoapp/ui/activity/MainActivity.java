@@ -2,11 +2,14 @@ package com.example.nlospc.potatoapp.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.nlospc.potatoapp.R;
@@ -22,15 +25,37 @@ import com.example.nlospc.potatoapp.widget.IconFontTextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
+    @BindView(R.id.tv_back)
+    IconFontTextView tvBack;
+    @BindView(R.id.tv_search)
+    IconFontTextView tvSearch;
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    @BindView(R.id.if_home)
+    IconFontTextView ifHome;
+    @BindView(R.id.tv_home)
+    AppCompatTextView tvHome;
+    @BindView(R.id.ll_home)
+    LinearLayout llHome;
+    @BindView(R.id.if_type)
+    IconFontTextView ifType;
+    @BindView(R.id.tv_type)
+    AppCompatTextView tvType;
+    @BindView(R.id.ll_type)
+    LinearLayout llType;
+    @BindView(R.id.if_user)
+    IconFontTextView ifUser;
+    @BindView(R.id.tv_user)
+    AppCompatTextView tvUser;
+    @BindView(R.id.ll_user)
+    LinearLayout llUser;
     private ViewPager mViewPager;
-    private IconFontTextView ifHome;
-    private TextView tvHome;
-    private IconFontTextView ifType;
-    private TextView tvType;
-    private IconFontTextView ifUser;
-    private TextView tvUser;
     private List<Fragment> mFragments = new ArrayList<>();
+
     @Override
     protected int provideContentViewId() {
         return R.layout.activity_main;
@@ -52,6 +77,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ifUser = view.findViewById(R.id.if_user);
         tvType = view.findViewById(R.id.tv_type);
         tvUser = view.findViewById(R.id.tv_user);
+        view.findViewById(R.id.ll_user).setOnClickListener(this);
+        view.findViewById(R.id.ll_type).setOnClickListener(this);
+        view.findViewById(R.id.ll_home).setOnClickListener(this);
+        view.findViewById(R.id.tv_search).setOnClickListener(this);
         setTabColor(ifHome, tvHome);
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
@@ -89,9 +118,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     private void setTabColor(IconFontTextView icon, TextView textView) {
-        Log.d("Test", "ifHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + ifHome);
-        Log.d("Test", "tvHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + tvHome);
-        Log.d("Test", "ifType>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + ifType);
+        Log.d("Test", "ifHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + icon);
+        Log.d("Test", "tvHome>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + textView);
         ifHome.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
         tvHome.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
         ifType.setTextColor(UIUtils.getColor(R.color.tab_nor_color));
@@ -123,5 +151,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));
                 break;
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

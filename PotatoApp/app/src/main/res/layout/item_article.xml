@@ -19,8 +19,8 @@
                 android:id="@+id/iv_photo"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_photo" />
+                android:scaleType="fitXY"/>
+                <!--android:src="@mipmap/ic_photo" -->
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_author"
                 android:layout_width="wrap_content"
