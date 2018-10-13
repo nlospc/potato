@@ -1,5 +1,6 @@
 package com.example.nlospc.potatoapp.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -23,24 +24,36 @@ import com.example.nlospc.potatoapp.ui.adapter.ArticleListAdapter;
 import com.example.nlospc.potatoapp.ui.presenter.SearchPresenter;
 import com.example.nlospc.potatoapp.view.SearchView;
 import com.example.nlospc.potatoapp.widget.AutoLineFeedLayout;
+import com.example.nlospc.potatoapp.widget.IconFontTextView;
 
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
-        implements SearchView, BaseQuickAdapter.RequestLoadMoreListener,View.OnClickListener {
-    private EditText etSearch;
-    private RelativeLayout rlSearch;
-    private TextView tvBack;
-    private TextView tvCleanInput;
-    private AutoLineFeedLayout layoutHotKey;
-    private LinearLayout llHotKey;
-    private RecyclerView rvContent;
+        implements SearchView, BaseQuickAdapter.RequestLoadMoreListener, View.OnClickListener {
+
+    @BindView(R.id.tv_ic_search)
+    IconFontTextView tvIcSearch;
+    @BindView(R.id.et_search)
+    EditText etSearch;
+    @BindView(R.id.tv_clean_input)
+    IconFontTextView tvCleanInput;
+    @BindView(R.id.rl_search)
+    RelativeLayout rlSearch;
+    @BindView(R.id.tv_return)
+    TextView tvReturn;
+    @BindView(R.id.layout_hot_key)
+    AutoLineFeedLayout layoutHotKey;
+    @BindView(R.id.ll_hot_key)
+    LinearLayout llHotKey;
+    @BindView(R.id.rv_content)
+    RecyclerView rvContent;
     private ArticleListAdapter mArticleAdapter;
 
-    @Override
+    @OnClick({R.id.tv_clean_input, R.id.tv_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_clean_input:
@@ -75,13 +88,6 @@ public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
 
     @Override
     public void initView() {
-        etSearch = findViewById(R.id.et_name);
-        rlSearch = findViewById(R.id.rl_search);
-        tvBack = findViewById(R.id.tv_back);
-        tvCleanInput = findViewById(R.id.tv_clean_input);
-        layoutHotKey = findViewById(R.id.layout_hot_key);
-        llHotKey = findViewById(R.id.ll_hot_key);
-        rvContent = findViewById(R.id.rv_content);
         rvContent.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
         mArticleAdapter = new ArticleListAdapter(SearchActivity.this, null);
         rvContent.setAdapter(mArticleAdapter);
@@ -172,4 +178,6 @@ public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
     public void loadMoreDataFail(String message) {
         Toast.makeText(SearchActivity.this, "没有更多了", Toast.LENGTH_SHORT).show();
     }
+
+
 }

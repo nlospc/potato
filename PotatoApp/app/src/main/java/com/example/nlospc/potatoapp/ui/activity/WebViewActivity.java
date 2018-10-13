@@ -5,8 +5,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -24,6 +26,10 @@ import com.example.nlospc.potatoapp.widget.CustomPopWindow;
 import com.example.nlospc.potatoapp.widget.IconFontTextView;
 import com.example.nlospc.potatoapp.widget.WebViewFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by duanziqi on 2018/9/20
  * Description:
@@ -31,16 +37,23 @@ import com.example.nlospc.potatoapp.widget.WebViewFragment;
 public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresenter>
         implements CommonWebView, View.OnClickListener {
     public static final String WEB_URL = "web_url";
+    @BindView(R.id.tv_return)
+    IconFontTextView tvReturn;
+    @BindView(R.id.tv_title)
+    AppCompatTextView tvTitle;
+    @BindView(R.id.tv_other)
+    IconFontTextView tvOther;
+    @BindView(R.id.rl_toolbar_layout)
+    RelativeLayout rlToolbarLayout;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.webview_container)
+    NestedScrollView webviewContainer;
     private String mUrl;
     private CustomPopWindow mMorePopWindow;
     private WebViewFragment mWebViewFragment;
     private WebView webView;
-    private ProgressBar mProgressBar;
-    private TextView mTvBack;
-    private TextView mTvTitle;
-    private IconFontTextView mTvOther;
-    private RelativeLayout mRlTopbar;
-    private NestedScrollView mWebViewContainer;
+
 
     public static void runActivity(Context context, String mUrl) {
         Intent intent = new Intent(context, WebViewActivity.class);
@@ -50,13 +63,7 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
 
     @Override
     public void initView() {
-        mProgressBar = findViewById(R.id.progress_bar);
-        mTvBack = findViewById(R.id.tv_back);
-        mTvTitle = findViewById(R.id.tv_title);
-        mTvOther = findViewById(R.id.tv_other);
-        mRlTopbar = findViewById(R.id.rl_toolbar_layout);
-        mWebViewContainer = findViewById(R.id.webview_container);
-        mTvOther.setText(UIUtils.getString(R.string.ic_more));
+        tvOther.setText(UIUtils.getString(R.string.ic_more));
         mWebViewFragment = new WebViewFragment();
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), mWebViewFragment, R.id.webview_container);
     }
@@ -74,12 +81,12 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
 
     @Override
     public ProgressBar getProgressBar() {
-        return mProgressBar;
+        return progressBar;
     }
 
     @Override
     public void setTitle(String title) {
-        mTvTitle.setText(title);
+        tvTitle.setText(title);
     }
 
     @Override
@@ -116,7 +123,7 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
+    @OnClick({R.id.tv_back,R.id.tv_other})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_back:
@@ -128,7 +135,7 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
                         .setView(popView)
                         .enableBackgroundDark(false)
                         .create()
-                        .showAsDropDown(mTvOther, -430, -10);
+                        .showAsDropDown(tvOther, -430, -10);
 
                 popView.findViewById(R.id.tv_shape).setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -150,4 +157,6 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
                 break;
         }
     }
+
+
 }

@@ -34,9 +34,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void initView() {
-        tvSearch = findViewById(R.id.tv_search);
-        tvTitle = findViewById(R.id.tv_title);
-        tvTitle.setText("关于");
+
         tvSearch.setVisibility(View.GONE);
     }
 

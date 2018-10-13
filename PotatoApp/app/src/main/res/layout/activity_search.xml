@@ -18,7 +18,7 @@
             android:background="@drawable/bg_round_frame_grey">
 
 
-            <com.lqm.tomatoit.widget.IconFontTextView
+            <com.example.nlospc.potatoapp.widget.IconFontTextView
                 android:id="@+id/tv_ic_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:textColorHint="@color/text3"
                 android:textSize="14sp" />
 
-            <com.lqm.tomatoit.widget.IconFontTextView
+            <com.example.nlospc.potatoapp.widget.IconFontTextView
                 android:id="@+id/tv_clean_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <com.lqm.tomatoit.widget.AutoLinefeedLayout
+            <com.example.nlospc.potatoapp.widget.AutoLineFeedLayout
                 android:id="@+id/layout_hot_key"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -27,14 +27,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity  {
     @BindView(R.id.tv_back)
     IconFontTextView tvBack;
     @BindView(R.id.tv_search)
     IconFontTextView tvSearch;
     @BindView(R.id.view_pager)
-    ViewPager viewPager;
+    ViewPager mViewPager;
     @BindView(R.id.if_home)
     IconFontTextView ifHome;
     @BindView(R.id.tv_home)
@@ -53,7 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     AppCompatTextView tvUser;
     @BindView(R.id.ll_user)
     LinearLayout llUser;
-    private ViewPager mViewPager;
+
     private List<Fragment> mFragments = new ArrayList<>();
 
     @Override
@@ -68,19 +69,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initView() {
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.activity_main, null);
-        mViewPager = view.findViewById(R.id.view_pager);
-        ifHome = view.findViewById(R.id.if_home);
-        tvHome = view.findViewById(R.id.tv_home);
-        ifType = view.findViewById(R.id.if_type);
-        ifUser = view.findViewById(R.id.if_user);
-        tvType = view.findViewById(R.id.tv_type);
-        tvUser = view.findViewById(R.id.tv_user);
-        view.findViewById(R.id.ll_user).setOnClickListener(this);
-        view.findViewById(R.id.ll_type).setOnClickListener(this);
-        view.findViewById(R.id.ll_home).setOnClickListener(this);
-        view.findViewById(R.id.tv_search).setOnClickListener(this);
         setTabColor(ifHome, tvHome);
         mFragments.add(HomeFragment.newInstance());
         mFragments.add(TypeFragment.newInstance());
@@ -130,14 +118,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         textView.setTextColor(UIUtils.getColor(R.color.tab_sel_color));
     }
 
-    @Override
+    @OnClick({R.id.ll_home,R.id.ll_type,R.id.ll_user,R.id.tv_search})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ll_home:
                 mViewPager.setCurrentItem(0);
                 setTabColor(ifHome, tvHome);
-                break;
-            case R.id.ll_hot_key:
                 break;
             case R.id.ll_type:
                 mViewPager.setCurrentItem(1);
@@ -152,11 +138,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
-
-    @Override
+/*    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-    }
+    }*/
 }
