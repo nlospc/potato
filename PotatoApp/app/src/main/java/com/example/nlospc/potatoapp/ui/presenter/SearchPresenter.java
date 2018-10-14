@@ -14,7 +14,7 @@ import java.util.List;
 public class SearchPresenter extends BasePresenter<SearchView> {
     private int mCurrentPage;
 
-    public void getHotKeyData(){
+    public void getHotKeyData() {
         WanService.getHotKey()
                 .compose(RxSchedulersHelper.mainio())
                 .compose(RxResultHelper.handleResult())
@@ -26,14 +26,15 @@ public class SearchPresenter extends BasePresenter<SearchView> {
 
                     @Override
                     public void _onNext(List<HotWordBean> hotWordBeans) {
+
                         getView().getHotKeySuccess(hotWordBeans);
                     }
                 });
     }
 
-    public void searchData(String key){
-        mCurrentPage=0;
-        WanService.searchArticle(mCurrentPage,key)
+    public void searchData(String key) {
+        mCurrentPage = 0;
+        WanService.searchArticle(mCurrentPage, key)
                 .compose(RxSchedulersHelper.mainio())
                 .compose(RxResultHelper.handleResult())
                 .subscribe(new RxObserver<ArticleListVO>() {
@@ -49,9 +50,9 @@ public class SearchPresenter extends BasePresenter<SearchView> {
                 });
     }
 
-    public void getMoreData(String key){
-        mCurrentPage+=1;
-        WanService.searchArticle(mCurrentPage,key)
+    public void getMoreData(String key) {
+        mCurrentPage += 1;
+        WanService.searchArticle(mCurrentPage, key)
                 .compose(RxSchedulersHelper.mainio())
                 .compose(RxResultHelper.handleResult())
                 .subscribe(new RxObserver<ArticleListVO>() {

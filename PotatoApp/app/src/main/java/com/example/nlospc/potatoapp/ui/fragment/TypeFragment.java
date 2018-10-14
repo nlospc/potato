@@ -1,10 +1,14 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
+import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.nlospc.potatoapp.R;
@@ -14,14 +18,28 @@ import com.example.nlospc.potatoapp.ui.adapter.ArticleListAdapter;
 import com.example.nlospc.potatoapp.ui.presenter.TypePresenter;
 import com.example.nlospc.potatoapp.view.TypeView;
 import com.example.nlospc.potatoapp.widget.AutoLineFeedLayout;
+import com.zhy.autolayout.AutoLinearLayout;
 
 import java.util.List;
 
-public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
-        implements TypeView, BaseQuickAdapter.RequestLoadMoreListener{
-    TabLayout mTabLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+public class TypeFragment extends BaseFragment<TypeView, TypePresenter>
+        implements TypeView, BaseQuickAdapter.RequestLoadMoreListener {
+
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
+    @BindView(R.id.rv_content)
     RecyclerView rvContent;
+    @BindView(R.id.ll_tag)
     AutoLineFeedLayout llTag;
+    @BindView(R.id.layout_blank)
+    AutoLinearLayout layoutBlank;
+    @BindView(R.id.ll_main)
+    ConstraintLayout llMain;
+    Unbinder unbinder;
     private ArticleListAdapter mAdapter;
 
     public static TypeFragment newInstance() {
@@ -40,14 +58,14 @@ public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
 
     @Override
     public void initView(View rootView) {
-        rvContent=rootView.findViewById(R.id.rv_content);
-        mTabLayout=rootView.findViewById(R.id.tabLayout);
-        llTag=rootView.findViewById(R.id.ll_tag);
+        rvContent = rootView.findViewById(R.id.rv_content);
+        tabLayout = rootView.findViewById(R.id.tabLayout);
+        llTag = rootView.findViewById(R.id.ll_tag);
 
         rvContent.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new ArticleListAdapter(getContext(),null);
+        mAdapter = new ArticleListAdapter(getContext(), null);
         rvContent.setAdapter(mAdapter);
-        mAdapter.setOnLoadMoreListener(this,rvContent);
+        mAdapter.setOnLoadMoreListener(this, rvContent);
 
         mPresenter.getTagData();
     }
@@ -59,7 +77,7 @@ public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
 
     @Override
     public TabLayout getTableLayout() {
-        return mTabLayout;
+        return tabLayout;
     }
 
     @Override
@@ -91,5 +109,19 @@ public class TypeFragment extends BaseFragment<TypeView,TypePresenter>
         } else {
             mAdapter.loadMoreEnd();
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

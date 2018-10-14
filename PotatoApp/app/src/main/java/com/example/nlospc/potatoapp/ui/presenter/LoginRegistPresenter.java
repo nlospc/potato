@@ -29,11 +29,13 @@ public class LoginRegistPresenter extends BasePresenter<LoginRegistView> {
                     @Override
                     public void _onError(String errorMessage) {
                         getView().loginFail();
+                        getView().hideProgress();
                     }
 
                     @Override
                     public void _onNext(UserBean userBean) {
                         getView().loginSuccess(userBean);
+                        getView().hideProgress();
                     }
                     @Override
                     public void _onComplete() {
@@ -61,11 +63,13 @@ public class LoginRegistPresenter extends BasePresenter<LoginRegistView> {
                     @Override
                     public void _onError(String errorMessage) {
                         getView().registerFail();
+                        getView().hideProgress();
                     }
 
                     @Override
                     public void _onNext(UserBean userBean) {
                         getView().registerSuccess(userBean);
+                        getView().hideProgress();
                     }
                 });
 

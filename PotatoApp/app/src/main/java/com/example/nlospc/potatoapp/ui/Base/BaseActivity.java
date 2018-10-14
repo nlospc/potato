@@ -17,6 +17,7 @@ import com.example.nlospc.potatoapp.app.App;
 import com.example.nlospc.potatoapp.widget.MyDialog;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AutoLayoutActivity {

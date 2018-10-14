@@ -1,11 +1,14 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,12 +24,19 @@ import com.example.nlospc.potatoapp.widget.ImageLoaderManager;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import cn.bingoogolapple.bgabanner.BGABanner;
 
 public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
         implements HomeView, SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
-    private RecyclerView rvContent;
-    private SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.rv_content)
+    RecyclerView rvContent;
+    @BindView(R.id.swipe_fresh)
+    SwipeRefreshLayout swipeFresh;
+    Unbinder unbinder;
     private ArticleListAdapter mAdapter;
     private BGABanner mBannerView;
 
@@ -54,12 +64,12 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
 
     @Override
     public void showRefreshView(boolean refresh) {
-        swipeRefreshLayout.post(() -> swipeRefreshLayout.setRefreshing(refresh));
+        swipeFresh.post(() -> swipeFresh.setRefreshing(refresh));
     }
 
     @Override
     public void getBannerDataSuccess(List<BannerBean> data) {
-        Log.d("getBannerDataSuccess","data>>>>>>>2>>>>>>>>>"+data);
+        Log.d("getBannerDataSuccess", "data>>>>>>>2>>>>>>>>>" + data);
         mBannerView.setData(R.layout.item_banner, data, null);
         mBannerView.setAdapter((BGABanner.Adapter<View, BannerBean>) (banner, itemView, model, position) -> {
             ImageView imageView = itemView.findViewById(R.id.image_view);
@@ -67,14 +77,15 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
         });
         mBannerView.setDelegate((BGABanner.Delegate<View, BannerBean>) (banner, itemView, model, position) -> WebViewActivity.runActivity(getContext(), model.getUrl()));
     }
+
     @Override
     public void initView(View v) {
         rvContent = v.findViewById(R.id.rv_content);
-        swipeRefreshLayout = v.findViewById(R.id.swipe_fresh);
+        swipeFresh = v.findViewById(R.id.swipe_fresh);
         rvContent.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ArticleListAdapter(getContext(), null);
         rvContent.setAdapter(mAdapter);
-        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeFresh.setOnRefreshListener(this);
         mAdapter.setOnLoadMoreListener(this, rvContent);
 
         //添加头部轮播图布局
@@ -109,5 +120,19 @@ public class HomeFragment extends BaseFragment<HomeView, HomePresenter>
     @Override
     public void onLoadMoreRequested() {
         mPresenter.getMoreData();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

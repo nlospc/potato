@@ -59,7 +59,7 @@ public class LoginActivity extends BaseActivity<LoginRegistView, LoginRegistPres
                 } else if (etPasswd.getText().toString().length() < 6 || etPasswd.getText().toString().length() > 16) {
                     Toast.makeText(LoginActivity.this, "密码为6~16位", Toast.LENGTH_SHORT).show();
                 } else {
-                    mPresenter.toLogin(etName.getText().toString(), etPasswd.getText().toString());
+                    mPresenter.toRegist(etName.getText().toString(), etPasswd.getText().toString());
                 }
                 break;
         }

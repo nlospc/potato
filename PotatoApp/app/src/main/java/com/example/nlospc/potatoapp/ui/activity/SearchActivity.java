@@ -1,6 +1,5 @@
 package com.example.nlospc.potatoapp.ui.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -8,7 +7,9 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,7 +30,6 @@ import com.example.nlospc.potatoapp.widget.IconFontTextView;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
@@ -53,13 +53,13 @@ public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
     RecyclerView rvContent;
     private ArticleListAdapter mArticleAdapter;
 
-    @OnClick({R.id.tv_clean_input, R.id.tv_back})
+    @OnClick({R.id.tv_clean_input, R.id.tv_return})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_clean_input:
                 etSearch.setText(" ");
                 break;
-            case R.id.tv_back:
+            case R.id.tv_return:
                 finish();
                 break;
         }
@@ -121,21 +121,25 @@ public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
         layoutHotKey.removeAllViews();
         for (int i = 0; i < data.size(); i++) {
             View view = LinearLayout.inflate(SearchActivity.this, R.layout.item_search, null);
-            TextView tvHotKey = findViewById(R.id.text_item);
+            TextView tvHotKey = view.findViewById(R.id.text_item);
             tvHotKey.setText(data.get(i).getName());
+            Log.d("Test","tvHotKey.getParent>>>>>>>>>>>>>>>"+tvHotKey.getParent());
+            Log.d("Test","view.getParent>>>>>>>>>>>>>>>"+view.getParent());
+            Log.d("Test","layoutHotKey.getParent>>>>>>>>>>>>>>>"+layoutHotKey.getParent());
+            if(tvHotKey.getParent()!=null){
+                ViewGroup parent= (ViewGroup) tvHotKey.getParent();
+                parent.removeAllViewsInLayout();
+            }else
             layoutHotKey.addView(tvHotKey);
             int finalone = i;
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    etSearch.setText(data.get(finalone).getName());
+            view.setOnClickListener(view1 -> {
+                etSearch.setText(data.get(finalone).getName());
 
-                    CharSequence charSequence = etSearch.getText();
+                CharSequence charSequence = etSearch.getText();
 
-                    if (charSequence instanceof Spannable) {
-                        Spannable spanText = (Spannable) charSequence;
-                        Selection.setSelection(spanText, charSequence.length());
-                    }
+                if (charSequence instanceof Spannable) {
+                    Spannable spanText = (Spannable) charSequence;
+                    Selection.setSelection(spanText, charSequence.length());
                 }
             });
         }

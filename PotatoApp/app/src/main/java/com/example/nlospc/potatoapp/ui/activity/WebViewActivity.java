@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * Description:
  */
 public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresenter>
-        implements CommonWebView, View.OnClickListener {
+        implements CommonWebView {
     public static final String WEB_URL = "web_url";
     @BindView(R.id.tv_return)
     IconFontTextView tvReturn;
@@ -58,7 +58,7 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
     public static void runActivity(Context context, String mUrl) {
         Intent intent = new Intent(context, WebViewActivity.class);
         intent.putExtra(WEB_URL, mUrl);
-        context.startActivities(new Intent[]{intent});
+        context.startActivity(intent);
     }
 
     @Override
