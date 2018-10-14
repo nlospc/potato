@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.AppCompatTextView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -40,15 +39,16 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
     @BindView(R.id.tv_return)
     IconFontTextView tvReturn;
     @BindView(R.id.tv_title)
-    AppCompatTextView tvTitle;
+    TextView tvTitle;
     @BindView(R.id.tv_other)
     IconFontTextView tvOther;
-    @BindView(R.id.rl_toolbar_layout)
-    RelativeLayout rlToolbarLayout;
+    @BindView(R.id.rl_topbar_layout)
+    RelativeLayout rlTopbarLayout;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.webview_container)
     NestedScrollView webviewContainer;
+
     private String mUrl;
     private CustomPopWindow mMorePopWindow;
     private WebViewFragment mWebViewFragment;
@@ -123,10 +123,10 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.tv_back,R.id.tv_other})
+    @OnClick({R.id.tv_return, R.id.tv_other})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_back:
+            case R.id.tv_return:
                 finish();
                 break;
             case R.id.tv_other:
@@ -157,6 +157,7 @@ public class WebViewActivity extends BaseActivity<CommonWebView, WebViewPresente
                 break;
         }
     }
+
 
 
 }

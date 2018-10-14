@@ -128,7 +128,7 @@ public class SearchActivity extends BaseActivity<SearchView, SearchPresenter>
             Log.d("Test","layoutHotKey.getParent>>>>>>>>>>>>>>>"+layoutHotKey.getParent());
             if(tvHotKey.getParent()!=null){
                 ViewGroup parent= (ViewGroup) tvHotKey.getParent();
-                parent.removeAllViewsInLayout();
+                parent.removeView(tvHotKey);
             }else
             layoutHotKey.addView(tvHotKey);
             int finalone = i;

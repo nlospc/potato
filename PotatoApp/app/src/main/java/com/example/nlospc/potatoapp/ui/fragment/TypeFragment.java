@@ -1,7 +1,6 @@
 package com.example.nlospc.potatoapp.ui.fragment;
 
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.nlospc.potatoapp.R;
@@ -29,6 +29,8 @@ import butterknife.Unbinder;
 public class TypeFragment extends BaseFragment<TypeView, TypePresenter>
         implements TypeView, BaseQuickAdapter.RequestLoadMoreListener {
 
+
+    Unbinder unbinder;
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
     @BindView(R.id.rv_content)
@@ -38,8 +40,7 @@ public class TypeFragment extends BaseFragment<TypeView, TypePresenter>
     @BindView(R.id.layout_blank)
     AutoLinearLayout layoutBlank;
     @BindView(R.id.ll_main)
-    ConstraintLayout llMain;
-    Unbinder unbinder;
+    LinearLayout llMain;
     private ArticleListAdapter mAdapter;
 
     public static TypeFragment newInstance() {

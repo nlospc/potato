@@ -2,9 +2,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,57 +17,58 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <RelativeLayout
-                android:id="@+id/rl_toolbar_layout"
+                android:id="@+id/rl_topbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="59dp"
+                android:layout_height="48dp"
                 android:background="@color/colorPrimary"
                 tools:ignore="UselessParent">
 
                 <com.example.nlospc.potatoapp.widget.IconFontTextView
                     android:id="@+id/tv_return"
-                    android:layout_width="59dp"
+                    android:layout_width="98px"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginLeft="5px"
                     android:gravity="center"
                     android:text="@string/ic_return"
-                    android:textColor="@color/text_white"
-                    android:textSize="32sp" />
+                    android:textColor="@color/white"
+                    android:textSize="65px" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginEnd="60dp"
-                    android:layout_marginStart="60dp"
+                    android:layout_marginLeft="120px"
+                    android:layout_marginRight="120px"
                     android:maxLines="1"
-                    android:textColor="@color/text_white"
-                    android:textSize="18sp" />
+                    android:textColor="@color/white"
+                    android:textSize= "18dp"/>
 
                 <com.example.nlospc.potatoapp.widget.IconFontTextView
                     android:id="@+id/tv_other"
-                    android:layout_width="59dp"
+                    android:layout_width="98px"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:text="@string/ic_share"
-                    android:textColor="@color/text_white"
-                    android:textSize="22sp"
+                    android:textColor="@color/white"
+                    android:textSize="55px"
                     android:visibility="visible" />
 
-                <view
+                <View
                     style="@style/lineStyle"
                     android:layout_alignParentBottom="true" />
 
             </RelativeLayout>
+
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <ProgressBar
             android:id="@+id/progress_bar"
             style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
@@ -75,7 +76,7 @@
             android:layout_height="wrap_content"
             android:indeterminate="false"
             android:indeterminateDrawable="@color/main"
-            android:minHeight="3dp"
+            android:minHeight="6px"
             android:progressDrawable="@drawable/progress_bar_status" />
 
         <android.support.v4.widget.NestedScrollView
@@ -84,7 +85,6 @@
             android:layout_height="match_parent"
             android:descendantFocusability="blocksDescendants"
             />
-
     </LinearLayout>
 
 
